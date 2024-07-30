@@ -8,11 +8,11 @@ int main()
 {
     MAI MythAI;
 
-    MAI_Layer *inputLayer  = MythAI.CreateLayer(1, SIGMOID);
+    MAI_Layer *inputLayer  = MythAI.CreateLayer(4, SIGMOID);
     MAI_Layer *outputLayer = MythAI.CreateLayer(1, SIGMOID);
 
     MythAI.layers.push_back(inputLayer);
-    MythAI.layers.push_back(MythAI.CreateLayer(16, SIGMOID));
+    MythAI.layers.push_back(MythAI.CreateLayer(4, SIGMOID));
     MythAI.layers.push_back(outputLayer);
 
     std::vector<int> dataset;
@@ -47,7 +47,7 @@ int main()
 
         for (int i = 0; i < dataset.size(); i++)
         {
-            std::string iBinary = std::bitset<1> (i).to_string();
+            std::string iBinary = std::bitset<4> (i).to_string();
 
             for (size_t s = 0; s < iBinary.size(); s++)
                 inputLayer->neurons[s]->activation = ((iBinary[s] == '1') ? 1 : 0);
@@ -70,7 +70,7 @@ int main()
 
     for (int i = 0; i < dataset.size(); i++)
     {
-        std::string iBinary = std::bitset<1> (i).to_string();
+        std::string iBinary = std::bitset<4> (i).to_string();
 
         for (size_t s = 0; s < iBinary.size(); s++)
             inputLayer->neurons[s]->activation = ((iBinary[s] == '1') ? 1 : 0);
@@ -101,7 +101,9 @@ int main()
 
         std::cin >> input;
 
-        std::string iBinary = std::bitset<1> (input).to_string();
+        std::string iBinary = std::bitset<4> (input).to_string();
+
+        std::cout << iBinary << std::endl;
 
         for (size_t s = 0; s < iBinary.size(); s++)
             inputLayer->neurons[s]->activation = ((iBinary[s] == '1') ? 1 : 0);
